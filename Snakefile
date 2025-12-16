@@ -63,7 +63,7 @@ rule prep_chr1:
     input:
         "input/id_{set}.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         "beds/{set}/{set}_wchr.bed",
     shell:
@@ -76,7 +76,7 @@ rule prep_chr2:
     input:
         "beds/{set}/{set}_wchr.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         "beds/{set}/{set}_nochr.bed",
     shell:
@@ -90,7 +90,7 @@ rule prep_merg1:
         nochr="beds/{set}/{set}_nochr.bed",
         wchr="beds/{set}/{set}_wchr.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         nochr="beds/{set}/{set}_nochr_merged.bed",
         wchr="beds/{set}/{set}_merged.bed",
@@ -108,7 +108,7 @@ rule CTCF:
         bed="beds/{set}/{set}_wchr.bed",
         anno="annotations/CTCF/Wangetal_hg38.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_ctcf.bed"),
     shell:
@@ -122,7 +122,7 @@ rule ultraconserved:
         bed="beds/{set}/{set}_wchr.bed",
         anno="annotations/ultraconserved/ultraconserved_hg38_muliz120M_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_ultraconserved.bed"),
     shell:
@@ -137,7 +137,7 @@ rule GC:
         bed="beds/{set}/{set}_wchr.bed",
         anno="annotations/GC/gc5Base.bedGraph.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         t1=temp("{set}/{set}_gc.bed"),
     shell:
@@ -153,7 +153,7 @@ rule gene_model_tmp:
         merg="beds/{set}/{set}_nochr_merged.bed",
         anno="annotations/ensembl_gff3/Homo_sapiens.GRCh38.96.chr.gtf.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/gm_tmp.bed"),
     shell:
@@ -168,7 +168,7 @@ rule gene_model:
         bed="beds/{set}/{set}_nochr.bed",
         anno="{set}/gm_tmp.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_genemodel.bed"),
     shell:
@@ -185,7 +185,7 @@ rule gene_model_dist:
         bed="beds/{set}/{set}_nochr.bed",
         anno="annotations/ensembl_gff3/Homo_sapiens.GRCh38.96.chr.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_genetic_dist.bed"),
     shell:
@@ -198,7 +198,7 @@ rule gene_names:
         bed="beds/{set}/{set}_nochr.bed",
         anno="annotations/ensembl_gff3/Homo_sapiens.GRCh38.96.chr.GENES.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         "{set}/{set}_genenames.bed",
     shell:
@@ -213,7 +213,7 @@ rule pli:
         gn="{set}/{set}_genenames.bed",
         pli="annotations/gnomad/pli_exac.csv",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_pli.bed"),
     shell:
@@ -228,7 +228,7 @@ rule cadd_PC_phylop:
         bed="beds/{set}/{set}_wchr.bed",
         anno="annotations/PhastCons/CADD_PC_PhyloP_scores.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_CADD_PC_PhyloP_maxsum.bed"),
     shell:
@@ -242,7 +242,7 @@ rule cadd2:
         bed="beds/{set}/{set}_wchr.bed",
         anno="annotations/CADD/CADD_GRCh38-v1.5.bedGraph_90q_12.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_cadd2_count.bed"),
     shell:
@@ -260,7 +260,7 @@ rule gerp:
         bed="beds/{set}/{set}_nochr.bed",
         anno="annotations/gerp/gerp_score2_hg38_MAM_90q.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_gerp_mean.bed"),
     shell:
@@ -274,7 +274,7 @@ rule gerp2:
         bed="beds/{set}/{set}_nochr.bed",
         anno="annotations/gerp/gerp_score2_hg38_MAM_90q.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_gerp2_count.bed"),
     shell:
@@ -289,7 +289,7 @@ rule LINSIGHT:
         bed="beds/{set}/{set}_wchr.bed",
         anno="annotations/linsight/LINSIGHT_hg38_sort.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_linsight_sum.bed"),
     shell:
@@ -308,7 +308,7 @@ rule EP:
         bed="beds/{set}/{set}_wchr.bed",
         ep="annotations/enhancer-promoter-links/sorted_encode.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_EP.bed"),
     shell:
@@ -323,7 +323,7 @@ rule fire:
         bed="beds/{set}/{set}_nochr.bed",
         anno="annotations/FIRE/fire_{celllines}.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_fire_{celllines}.bed"),
     shell:
@@ -347,7 +347,7 @@ rule HIC_hESC:
         bed="beds/{set}/{set}_wchr.bed",
         hic="annotations/hic/hESC/combined/sorted.total.combined.domain",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_HIC_hESC.bed"),
     shell:
@@ -362,7 +362,7 @@ rule HIC_encode:
         bed="beds/{set}/{set}_wchr.bed",
         hic="annotations/Encode-HIC/{cells}/sorted_{tad}.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_encode_{cells}_{tad}_hic.bed"),
     shell:
@@ -387,7 +387,7 @@ rule microsynteny:
         bed="beds/{set}/{set}_nochr.bed",
         hic="annotations/synteny/microsynteny.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_microsynteny.bed"),
     shell:
@@ -401,7 +401,7 @@ rule ccr:
         bed="beds/{set}/{set}_nochr.bed",
         anno="annotations/ccr/ccrs.all.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_ccr_mean.bed"),
     shell:
@@ -416,7 +416,7 @@ rule genomegitar1:
         bed="beds/{set}/{set}_wchr.bed",
         anno="annotations/genomegitar/{gg}/DI_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_genomegitar_{gg}.bed"),
     shell:
@@ -453,7 +453,7 @@ rule MPC:
         bed="beds/{set}/{set}_nochr.bed",
         anno="annotations/MPC/transcript_constraints_hg38liftover.bg.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_MPC_mean.bed"),
     shell:
@@ -467,7 +467,7 @@ rule RemapTF:
         bed="beds/{set}/{set}_nochr.bed",
         anno="annotations/ReMap/ReMap2_overlapTF_hg38.bg.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_remapTF_mean.bed"),
     shell:
@@ -483,7 +483,7 @@ rule encode:
         bed="beds/{set}/{set}_nochr.bed",
         anno="annotations/encode/{encodes}/{encodes}_merged_90quant.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_encode_{encodes}_mean.bed"),
     shell:
@@ -505,7 +505,7 @@ rule chromHMM_MAX:
         bed="beds/{set}/{set}_nochr.bed",
         anno="annotations/chromhmm/chromHMM_GRCh38.bg.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_chromHMM_max.bed"),
     shell:
@@ -522,7 +522,7 @@ rule Fantom5_counts:
         bed="beds/{set}/{set}_wchr.bed",
         anno="annotations/fantom5/F5.hg38.enhancers_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_f5_counts.bed"),
     shell:
@@ -536,7 +536,7 @@ rule HI:
         bed="beds/{set}/{set}_wchr.bed",
         anno="annotations/DDD_HI/hg38_HI_Predictions_version3_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_dddhi.bed"),
     shell:
@@ -550,7 +550,7 @@ rule deepc:
         bed="beds/{set}/{set}_wchr.bed",
         anno="annotations/deepc/saliencies_merged_gm12878_5kb_10bp.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_deepc.bed"),
     shell:
@@ -591,7 +591,7 @@ rule complete_script:
     output:
         "{set}/matrix.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     shell:
         """
         paste <(cut -f1-11 {input.cadd}) <(cut -f4 {input.cadd2}) <(cut -f4 {input.ccr}) <(cut -f4-28 {input.chromHMM}) <(cut -f4,5,7 {input.ctcf}) <(cut -f1 {input.di_min}) <(cut -f1 {input.di_max}) <(cut -f4,5,9,10,14,15,19,20,24,25,29,30,34,35,39,40,44,45,49,50,54,55,59,60,64,65 {input.encode}) <(cut -f4-7 {input.ep}) <(cut -f4,5,9,10,14,15,19,20,24,25 {input.fire}) <(cut -f4 {input.gc}) <(cut -f4-11 {input.gm}) <(cut -f4 {input.gerp}) <(cut -f4 {input.gerp2}) <(cut -f4,5,6,7,11,12,13,14,18,19,20,21,25,26,27,28 {input.hic}) <(cut -f4-7 {input.hesc}) <(cut -f4-7 {input.microsyn}) <(cut -f4 {input.mpc}) <(cut -f4 {input.pli}) <(cut -f4,5,6 {input.g_dist}) <(cut -f4 {input.remapTF}) <(cut -f4 {input.f5}) <(cut -f4 {input.hi}) <(cut -f4 {input.deepc}) <(cut -f4,5,7 {input.ultrac}) <(cut -f4 {input.linsight})| cat {input.header} - > {output}
@@ -613,7 +613,7 @@ rule prep_chr_100bpup:
         nchr="beds/{set}/{set}_100bpup_nchr.bed",
         tmp="beds/{set}/{set}_100bpup_tmp.bed"
     conda:
-        "envs/SV.yml"
+        "SV"
     shell:
         """
         cat {input.bed} | awk 'BEGIN{{OFS = "\t"}}{{if ($2 == 0) $2+=1 ; print $0}}' > {output.tmp}
@@ -628,7 +628,7 @@ rule prep_merg1_100bpup:
         nchr="beds/{set}/{set}_100bpup_nchr.bed",
         wchr="beds/{set}/{set}_100bpup.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         nchr="beds/{set}/{set}_100bpup_nchr_merged.bed",
         wchr="beds/{set}/{set}_100bpup_merged.bed",
@@ -646,7 +646,7 @@ rule CTCF_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         anno="annotations/CTCF/Wangetal_hg38.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_ctcf.bed"),
     shell:
@@ -660,7 +660,7 @@ rule ultraconserved_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         anno="annotations/ultraconserved/ultraconserved_hg38_muliz120M_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_ultraconserved.bed"),
     shell:
@@ -675,7 +675,7 @@ rule GC_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         anno="annotations/GC/gc5Base.bedGraph.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_gc.bed"),
     shell:
@@ -691,7 +691,7 @@ rule gene_model_tmp_100bpup:
         merg="beds/{set}/{set}_100bpup_nchr_merged.bed",
         anno="annotations/ensembl_gff3/Homo_sapiens.GRCh38.96.chr.gtf.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/gm_tmp_100bpup.bed"),
     shell:
@@ -706,7 +706,7 @@ rule gene_model_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         anno="{set}/gm_tmp_100bpup.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_genemodel.bed"),
     shell:
@@ -723,7 +723,7 @@ rule gene_model_dist_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         anno="annotations/ensembl_gff3/Homo_sapiens.GRCh38.96.chr.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_genetic_dist.bed"),
     shell:
@@ -737,7 +737,7 @@ rule gene_names_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         anno="annotations/ensembl_gff3/Homo_sapiens.GRCh38.96.chr.GENES.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_genenames.bed"),
     shell:
@@ -752,7 +752,7 @@ rule pli_100bpup:
         gn="{set}/{set}_100bpup_genenames.bed",
         pli="annotations/gnomad/pli_exac.csv",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_pli.bed"),
     shell:
@@ -767,7 +767,7 @@ rule cadd_PC_phylop_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         anno="annotations/PhastCons/CADD_PC_PhyloP_scores.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_CADD_PC_PhyloP_maxsum.bed"),
     shell:
@@ -781,7 +781,7 @@ rule cadd2_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         anno="annotations/CADD/CADD_GRCh38-v1.5.bedGraph_90q_12.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_cadd2_count.bed"),
     shell:
@@ -800,7 +800,7 @@ rule gerp_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         anno="annotations/gerp/gerp_score2_hg38_MAM_90q.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_gerp_mean.bed"),
     shell:
@@ -814,7 +814,7 @@ rule gerp2_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         anno="annotations/gerp/gerp_score2_hg38_MAM_90q.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_gerp2_count.bed"),
     shell:
@@ -829,7 +829,7 @@ rule LINSIGHT_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         anno="annotations/linsight/LINSIGHT_hg38_sort.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_linsight_sum.bed"),
     shell:
@@ -848,7 +848,7 @@ rule EP_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         ep="annotations/enhancer-promoter-links/sorted_encode.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_100bpup_EP.bed"),
     shell:
@@ -863,7 +863,7 @@ rule fire_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         anno="annotations/FIRE/fire_{celllines}.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_fire_{celllines}.bed"),
     shell:
@@ -887,7 +887,7 @@ rule HIC_hESC_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         hic="annotations/hic/hESC/combined/sorted.total.combined.domain",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_100bpup_HIC_hESC.bed"),
     shell:
@@ -902,7 +902,7 @@ rule HIC_encode_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         hic="annotations/Encode-HIC/{cells}/sorted_{tad}.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_100bpup_encode_{cells}_{tad}_hic.bed"),
     shell:
@@ -929,7 +929,7 @@ rule microsynteny_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         hic="annotations/synteny/microsynteny.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_100bpup_microsynteny.bed"),
     shell:
@@ -943,7 +943,7 @@ rule ccr_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         anno="annotations/ccr/ccrs.all.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_ccr_mean.bed"),
     shell:
@@ -958,7 +958,7 @@ rule genomegitar1_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         anno="annotations/genomegitar/{gg}/DI_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_genomegitar_{gg}.bed"),
     shell:
@@ -995,7 +995,7 @@ rule MPC_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         anno="annotations/MPC/transcript_constraints_hg38liftover.bg.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_MPC_mean.bed"),
     shell:
@@ -1009,7 +1009,7 @@ rule RemapTF_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         anno="annotations/ReMap/ReMap2_overlapTF_hg38.bg.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_remapTF_mean.bed"),
     shell:
@@ -1025,7 +1025,7 @@ rule encode_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         anno="annotations/encode/{encodes}/{encodes}_merged_90quant.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_encode_{encodes}_mean.bed"),
     shell:
@@ -1047,7 +1047,7 @@ rule chromHMM_MAX_100bpup:
         bed="beds/{set}/{set}_100bpup_nchr.bed",
         anno="annotations/chromhmm/chromHMM_GRCh38.bg.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_chromHMM_max.bed"),
     shell:
@@ -1064,7 +1064,7 @@ rule Fantom5_counts_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         anno="annotations/fantom5/F5.hg38.enhancers_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_f5_counts.bed"),
     shell:
@@ -1078,7 +1078,7 @@ rule HI_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         anno="annotations/DDD_HI/hg38_HI_Predictions_version3_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_dddhi.bed"),
     shell:
@@ -1092,7 +1092,7 @@ rule deepc_100bpup:
         bed="beds/{set}/{set}_100bpup.bed",
         anno="annotations/deepc/saliencies_merged_gm12878_5kb_10bp.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpup_deepc.bed"),
     shell:
@@ -1133,7 +1133,7 @@ rule complete_script_100bpup:
     output:
         "{set}/matrix_100bpup.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     shell:
         """
         paste <(cut -f1-11 {input.cadd}) <(cut -f4 {input.cadd2}) <(cut -f4 {input.ccr}) <(cut -f4-28 {input.chromHMM}) <(cut -f4,5,7 {input.ctcf}) <(cut -f1 {input.di_min}) <(cut -f1 {input.di_max}) <(cut -f4,5,9,10,14,15,19,20,24,25,29,30,34,35,39,40,44,45,49,50,54,55,59,60,64,65 {input.encode}) <(cut -f4-7 {input.ep}) <(cut -f4,5,9,10,14,15,19,20,24,25 {input.fire}) <(cut -f4 {input.gc}) <(cut -f4-11 {input.gm}) <(cut -f4 {input.gerp}) <(cut -f4 {input.gerp2}) <(cut -f4,5,6,7,11,12,13,14,18,19,20,21,25,26,27,28 {input.hic}) <(cut -f4-7 {input.hesc}) <(cut -f4-7 {input.microsyn}) <(cut -f4 {input.mpc}) <(cut -f4 {input.pli}) <(cut -f4,5,6 {input.g_dist}) <(cut -f4 {input.remapTF}) <(cut -f4 {input.f5}) <(cut -f4 {input.hi}) <(cut -f4 {input.deepc}) <(cut -f4,5,7 {input.ultrac}) <(cut -f4 {input.linsight})| cat {input.header} - > {output}
@@ -1154,7 +1154,7 @@ rule prep_chr_100bpdown:
         wchr="beds/{set}/{set}_100bpdown.bed",
         nchr="beds/{set}/{set}_100bpdown_nchr.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     shell:
         """
         bedtools flank -i {input.bed} -g {input.genome} -l 0 -r 100 | bedtools sort > {output.wchr}
@@ -1168,7 +1168,7 @@ rule prep_merg1_100bpdown:
         nchr="beds/{set}/{set}_100bpdown_nchr.bed",
         wchr="beds/{set}/{set}_100bpdown.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         nchr="beds/{set}/{set}_100bpdown_nchr_merged.bed",
         wchr="beds/{set}/{set}_100bpdown_merged.bed",
@@ -1186,7 +1186,7 @@ rule CTCF_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         anno="annotations/CTCF/Wangetal_hg38.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_ctcf.bed"),
     shell:
@@ -1200,7 +1200,7 @@ rule ultraconserved_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         anno="annotations/ultraconserved/ultraconserved_hg38_muliz120M_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_ultraconserved.bed"),
     shell:
@@ -1215,7 +1215,7 @@ rule GC_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         anno="annotations/GC/gc5Base.bedGraph.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_gc.bed"),
     shell:
@@ -1231,7 +1231,7 @@ rule gene_model_tmp_100bpdown:
         merg="beds/{set}/{set}_100bpdown_nchr_merged.bed",
         anno="annotations/ensembl_gff3/Homo_sapiens.GRCh38.96.chr.gtf.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/gm_tmp_100bpdown.bed"),
     shell:
@@ -1246,7 +1246,7 @@ rule gene_model_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         anno="{set}/gm_tmp_100bpdown.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_genemodel.bed"),
     shell:
@@ -1259,7 +1259,7 @@ rule gene_model_dist_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         anno="annotations/ensembl_gff3/Homo_sapiens.GRCh38.96.chr.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_genetic_dist.bed"),
     shell:
@@ -1274,7 +1274,7 @@ rule gene_names_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         anno="annotations/ensembl_gff3/Homo_sapiens.GRCh38.96.chr.GENES.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_genenames.bed"),
     shell:
@@ -1289,7 +1289,7 @@ rule pli_100bpdown:
         gn="{set}/{set}_100bpdown_genenames.bed",
         pli="annotations/gnomad/pli_exac.csv",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_pli.bed"),
     shell:
@@ -1304,7 +1304,7 @@ rule cadd_PC_phylop_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         anno="annotations/PhastCons/CADD_PC_PhyloP_scores.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_CADD_PC_PhyloP_maxsum.bed"),
     shell:
@@ -1318,7 +1318,7 @@ rule cadd2_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         anno="annotations/CADD/CADD_GRCh38-v1.5.bedGraph_90q_12.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_cadd2_count.bed"),
     shell:
@@ -1337,7 +1337,7 @@ rule gerp_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         anno="annotations/gerp/gerp_score2_hg38_MAM_90q.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_gerp_mean.bed"),
     shell:
@@ -1351,7 +1351,7 @@ rule gerp2_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         anno="annotations/gerp/gerp_score2_hg38_MAM_90q.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_gerp2_count.bed"),
     shell:
@@ -1366,7 +1366,7 @@ rule LINSIGHT_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         anno="annotations/linsight/LINSIGHT_hg38_sort.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_linsight_sum.bed"),
     shell:
@@ -1385,7 +1385,7 @@ rule EP_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         ep="annotations/enhancer-promoter-links/sorted_encode.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_100bpdown_EP.bed"),
     shell:
@@ -1400,7 +1400,7 @@ rule fire_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         anno="annotations/FIRE/fire_{celllines}.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_fire_{celllines}.bed"),
     shell:
@@ -1424,7 +1424,7 @@ rule HIC_hESC_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         hic="annotations/hic/hESC/combined/sorted.total.combined.domain",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_100bpdown_HIC_hESC.bed"),
     shell:
@@ -1439,7 +1439,7 @@ rule HIC_encode_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         hic="annotations/Encode-HIC/{cells}/sorted_{tad}.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_100bpdown_encode_{cells}_{tad}_hic.bed"),
     shell:
@@ -1468,7 +1468,7 @@ rule microsynteny_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         hic="annotations/synteny/microsynteny.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         o1=temp("{set}/{set}_100bpdown_microsynteny.bed"),
     shell:
@@ -1482,7 +1482,7 @@ rule ccr_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         anno="annotations/ccr/ccrs.all.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_ccr_mean.bed"),
     shell:
@@ -1497,7 +1497,7 @@ rule genomegitar1_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         anno="annotations/genomegitar/{gg}/DI_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_genomegitar_{gg}.bed"),
     shell:
@@ -1533,7 +1533,7 @@ rule MPC_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         anno="annotations/MPC/transcript_constraints_hg38liftover.bg.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_MPC_mean.bed"),
     shell:
@@ -1547,7 +1547,7 @@ rule RemapTF_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         anno="annotations/ReMap/ReMap2_overlapTF_hg38.bg.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_remapTF_mean.bed"),
     shell:
@@ -1563,7 +1563,7 @@ rule encode_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         anno="annotations/encode/{encodes}/{encodes}_merged_90quant.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_encode_{encodes}_mean.bed"),
     shell:
@@ -1585,7 +1585,7 @@ rule chromHMM_MAX_100bpdown:
         bed="beds/{set}/{set}_100bpdown_nchr.bed",
         anno="annotations/chromhmm/chromHMM_GRCh38.bg.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_chromHMM_max.bed"),
     shell:
@@ -1602,7 +1602,7 @@ rule Fantom5_counts_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         anno="annotations/fantom5/F5.hg38.enhancers_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_f5_counts.bed"),
     shell:
@@ -1616,7 +1616,7 @@ rule HI_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         anno="annotations/DDD_HI/hg38_HI_Predictions_version3_sort.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_dddhi.bed"),
     shell:
@@ -1630,7 +1630,7 @@ rule deepc_100bpdown:
         bed="beds/{set}/{set}_100bpdown.bed",
         anno="annotations/deepc/saliencies_merged_gm12878_5kb_10bp.bed.gz",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         temp("{set}/{set}_100bpdown_deepc.bed"),
     shell:
@@ -1671,7 +1671,7 @@ rule complete_script_100bpdown:
     output:
         "{set}/matrix_100bpdown.bed",
     conda:
-        "envs/SV.yml"
+        "SV"
     shell:
         """
         paste <(cut -f1-11 {input.cadd}) <(cut -f4 {input.cadd2}) <(cut -f4 {input.ccr}) <(cut -f4-28 {input.chromHMM}) <(cut -f4,5,7 {input.ctcf}) <(cut -f1 {input.di_min}) <(cut -f1 {input.di_max}) <(cut -f4,5,9,10,14,15,19,20,24,25,29,30,34,35,39,40,44,45,49,50,54,55,59,60,64,65 {input.encode}) <(cut -f4-7 {input.ep}) <(cut -f4,5,9,10,14,15,19,20,24,25 {input.fire}) <(cut -f4 {input.gc}) <(cut -f4-11 {input.gm}) <(cut -f4 {input.gerp}) <(cut -f4 {input.gerp2}) <(cut -f4,5,6,7,11,12,13,14,18,19,20,21,25,26,27,28 {input.hic}) <(cut -f4-7 {input.hesc}) <(cut -f4-7 {input.microsyn}) <(cut -f4 {input.mpc}) <(cut -f4 {input.pli}) <(cut -f4,5,6 {input.g_dist}) <(cut -f4 {input.remapTF}) <(cut -f4 {input.f5}) <(cut -f4 {input.hi}) <(cut -f4 {input.deepc}) <(cut -f4,5,7 {input.ultrac}) <(cut -f4 {input.linsight}) | cat {input.header} - > {output}
@@ -1691,7 +1691,7 @@ rule scoring:
         flank_down="{set}/matrix_100bpup.bed",
         genome="annotations/ucsc/hg38.fa.sorted.genome" #to check for regions towards the end of chromosome 
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
       temp("output/{set}.score"),
     params:
@@ -1706,7 +1706,7 @@ rule sort:
       score="output/{set}.score",
       header="annotations/header_final.txt",
     conda:
-        "envs/SV.yml"
+        "SV"
     output:
         "output/{set}_score.bed"
     shell:
