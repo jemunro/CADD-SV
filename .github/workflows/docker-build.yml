@@ -35,4 +35,4 @@ jobs:
           file: ./Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ghcr.io/bahlolab/cadd-sv:${{ inputs.image_tag || github.ref_name }}
+          tags: ghcr.io/jemunro/cadd-sv:${{ inputs.image_tag || github.ref_name }}
